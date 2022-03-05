@@ -2,17 +2,13 @@ const fs = require('fs');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./config.json');
+const { clientId, guildIds, token } = require('./config.json');
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs
+    .readdirSync('./commands')
+    .filter(file => file.endsWith('.js'));
 
-const commands = [
-	//new SlashCommandBuilder().setName('야').setDescription('호라고 대답합니다!'),
-    //new SlashCommandBuilder().setName('방구').setDescription('방구를 뀝니다!'),
-    //new SlashCommandBuilder().setName('서버').setDescription('서버 정보를 봅니다!'),
-    //new SlashCommandBuilder().setName('유저').setDescription('유저 정보를 봅니다!'),
-]
-	.map(command => command.toJSON());
+const commands = [];
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
@@ -21,6 +17,26 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '9' }).setToken(token);
 
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(() => console.log('커맨드 업데이트 완료'))
-	.catch(console.error);
+(async () => {
+    guildIds.map(async(guildId) => {
+        try {
+        await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+            body: commands,
+        });
+        console.log(`${guildId} 서버 성공`);
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    //이거 글로벌 커맨드 등록하는 놈인데 버그 있으니까 쓰지 말자
+    // try {
+    //     await rest.put(Routes.applicationCommands(clientId), {
+    //         body: commands,
+    //     });
+    //     console.log(`글로벌 명령어 등록 성공`);
+    // }
+    // catch (error) {
+    //     console.error(error);
+    // }
+})();
