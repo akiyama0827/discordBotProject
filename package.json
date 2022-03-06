@@ -15,5 +15,9 @@
     "discord-api-types": "^0.27.3",
     "discord.js": "^13.6.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
+ }
 }
