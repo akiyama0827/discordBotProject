@@ -49,7 +49,7 @@ module.exports = {
                 async action(interaction) {
 					await interaction.update({
 						content: '31게임을 진행합니다. 참가 버튼을 눌러 참가해주세요. 게임은 30초 후 자동으로 시작합니다.',
-						components: [gameBtns]
+						components: [row2]
 					})
                 },
             },
