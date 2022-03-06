@@ -1,1 +1,3 @@
-worker: npm run start:dev
+worker: ls
+worker: cd my-bot
+worker: node index.js
