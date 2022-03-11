@@ -4,7 +4,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const clientId = process.env.clientId;
 const guildId = process.env.guildId;
-const token = process.env.KEY;
+const token = process.env.token;
 
 const commandFiles = fs
     .readdirSync('./commands')
