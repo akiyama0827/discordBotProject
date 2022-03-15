@@ -7,7 +7,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const { clientId } = process.env.clientId;
 //const { guildId } = process.env.guildId;
-const { token } = process.env.token;
+var { token }  = null;
+ token = process.env.token;
 
 const commandFiles = fs
     .readdirSync('./commands')
