@@ -5,10 +5,9 @@ const { Routes } = require('discord-api-types/v9');
 
 const dotenv = require('dotenv');
 dotenv.config();
-const { clientId } = process.env.clientId;
-//const { guildId } = process.env.guildId;
-var { token }  = null;
- token = process.env.token;
+const { clientId } = process.env;
+//const { guildId } = process.env;
+const { token } = process.env;
 
 const commandFiles = fs
     .readdirSync('./commands')
