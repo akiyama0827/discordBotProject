@@ -13,7 +13,7 @@ module.exports = {
         const buttons = [
             {
                 customId: "가위",
-                label: "가위 ✌", // emoji not displayed on Ubuntu
+                label: "가위 ✌",
                 style: "DANGER",
                 async action(interaction) {
                     const result = Math.floor(Math.random()*3);
